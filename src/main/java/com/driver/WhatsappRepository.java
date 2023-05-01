@@ -89,7 +89,12 @@ public class WhatsappRepository {
             List<User> us = groupUserMap.get(group);
             for(User user :us){
                 if(user.equals(sender)){
-                    List<Message> mess = groupMessageMap.get(group);
+                    List<Message> mess ;
+                    if(groupMessageMap.containsKey(group))
+                    {
+                        mess = groupMessageMap.get(group);
+                    }
+                    else mess = new ArrayList<>();
                     mess.add(message);
                     groupMessageMap.put(group,mess);
                     return mess.size();
