@@ -48,16 +48,18 @@ public class WhatsappRepository {
             Group group = new Group(users.get(1).getName() , 2);
             groupUserMap.put(group , users);
             adminMap.put(group , users.get(0));
+            groupMessageMap.put(group,new ArrayList<Message>());
             return group;
 
-        }else{
+        }
             customGroupCount++;
             String name = "Group "+customGroupCount;
             Group group = new Group(name,users.size());
             groupUserMap.put(group,users);
             adminMap.put(group,users.get(0));
+            groupMessageMap.put(group,new ArrayList<Message>());
             return group;
-        }
+
     }
 
     public int createMessage(String content) {
@@ -89,12 +91,7 @@ public class WhatsappRepository {
             List<User> us = groupUserMap.get(group);
             for(User user :us){
                 if(user.equals(sender)){
-                    List<Message> mess ;
-                    if(groupMessageMap.containsKey(group))
-                    {
-                        mess = groupMessageMap.get(group);
-                    }
-                    else mess = new ArrayList<>();
+                    List<Message> mess = groupMessageMap.get(group);
                     mess.add(message);
                     groupMessageMap.put(group,mess);
                     return mess.size();
