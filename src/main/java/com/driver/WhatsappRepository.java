@@ -80,12 +80,21 @@ public class WhatsappRepository {
 //                    mess.add(message);
 //                    groupMessageMap.put(group , mess);
 //                    return mess.size();
+                    List<Message> list;
+             if(groupMessageMap.containsKey(group)) {
+              list = groupMessageMap.get(group);
 
-
-               List<Message> list = groupMessageMap.get(group);
                list.add(message);
                groupMessageMap.put(group,list);
-               return groupMessageMap.get(group).size();
+               return groupMessageMap.get(group).size(); }
+               else{
+                   list = new ArrayList<>();
+                   list.add(message);
+                 groupMessageMap.put(group,list);
+                 return groupMessageMap.get(group).size(); }
+
+
+
 
                 }
 
