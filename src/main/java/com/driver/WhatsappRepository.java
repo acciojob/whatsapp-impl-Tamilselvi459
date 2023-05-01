@@ -71,11 +71,12 @@ public class WhatsappRepository {
         if(groupUserMap.containsKey(group)){
             List<User> us =  groupUserMap.get(group);
             for(User ua: us){
-                if(ua.getName().equals(sender.getName())){
+                if(ua.getName().equals(sender.getName()) ){
+                    if(groupMessageMap.containsKey(group)) {
                     List<Message> mess = new ArrayList<>();
                     mess.add(message);
                     groupMessageMap.put(group , mess);
-                    return mess.size()-1;
+                    return mess.size()-1; }
 
                 }
 
