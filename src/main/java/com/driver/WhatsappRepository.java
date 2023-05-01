@@ -70,26 +70,41 @@ public class WhatsappRepository {
 
         if(groupUserMap.containsKey(group)){
             List<User> us =  groupUserMap.get(group);
-            for(User ua: us){
-                if(ua.getName().equals(sender.getName()) ){
-//                    List<Message> mess = new ArrayList<>();
-//                    mess.add(message);
-//                    groupMessageMap.put(group , mess);
+//            for(User ua: us){
+//                if(ua.getName().equals(sender.getName()) ){
+////                    List<Message> mess = new ArrayList<>();
+////                    mess.add(message);
+////                    groupMessageMap.put(group , mess);
+////                    return groupMessageMap.get(group).size();
+//                    List<Message> list = new ArrayList<>();
+//                    if(groupMessageMap.containsKey(group)){
+//                        list = groupMessageMap.get(group);
+//                    }
+//                    list.add(message);
+//                    groupMessageMap.put(group,list);
 //                    return groupMessageMap.get(group).size();
-                    List<Message> list = new ArrayList<>();
-                    if(groupMessageMap.containsKey(group)){
-                        list = groupMessageMap.get(group);
-                    }
-                    list.add(message);
-                    groupMessageMap.put(group,list);
-                    return groupMessageMap.get(group).size();
-
+//
+//                }
+            if(us.contains(sender)){
+                List<Message> messages;
+                if(groupMessageMap.containsKey(group)){
+                    messages = groupMessageMap.get(group);
                 }
+                else{
+                    messages = new ArrayList<>();
+                }
+
+                messages.add(message);
+
+                groupMessageMap.put(group,messages) ;
+
+                return messages.size() ;
+
 
             }
              return -1;
         }
-        return 0;
+        return -2;
     }
 
     public int changeAdmin(User approver, User user, Group group) {
