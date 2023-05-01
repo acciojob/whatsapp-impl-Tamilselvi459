@@ -68,21 +68,34 @@ public class WhatsappRepository {
 
     public int sendMessage(Message message, User sender, Group group) {
 
-        if(groupUserMap.containsKey(group)){
-            List<User> us =  groupUserMap.get(group);
-            for(User ua: us){
-                if(ua.getName().equals(sender.getName()) ) {
-
-
-                    List<Message> mess = new ArrayList<>();
+//        if(groupUserMap.containsKey(group)){
+//            List<User> us =  groupUserMap.get(group);
+//            for(User ua: us){
+//                if(ua.getName().equals(sender.getName()) ) {
+//
+//
+//                    List<Message> mess = new ArrayList<>();
+//                    mess.add(message);
+//                    groupMessageMap.put(group, mess);
+//                    return mess.size();
+//
+//                }
+//                }
+//
+//             return -1;
+//        }
+//        return -2;
+        if(adminMap.containsKey(group)){
+            List<User> us = groupUserMap.get(group);
+            for(User user :us){
+                if(user.equals(sender)){
+                    List<Message> mess = groupMessageMap.get(group);
                     mess.add(message);
-                    groupMessageMap.put(group, mess);
+                    groupMessageMap.put(group,mess);
                     return mess.size();
-
                 }
-                }
-
-             return -1;
+            }
+            return -1;
         }
         return -2;
     }
