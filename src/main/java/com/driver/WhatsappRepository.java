@@ -48,7 +48,6 @@ public class WhatsappRepository {
             Group group = new Group(users.get(1).getName() , 2);
             groupUserMap.put(group , users);
             adminMap.put(group , users.get(0));
-            groupMessageMap.put(group,list);
             return group;
 
         }else{
@@ -57,7 +56,6 @@ public class WhatsappRepository {
             Group group = new Group(name,users.size());
             groupUserMap.put(group,users);
             adminMap.put(group,users.get(0));
-            groupMessageMap.put(group,list);
             return group;
         }
     }
@@ -71,30 +69,13 @@ public class WhatsappRepository {
     public int sendMessage(Message message, User sender, Group group) {
 
         if(groupUserMap.containsKey(group)){
-            boolean flag = false;
             List<User> us =  groupUserMap.get(group);
             for(User ua: us){
                 if(ua.getName().equals(sender.getName())){
-//                   flag = true;
-//                    List<Message> mess = new ArrayList<>();
-//                    mess.add(message);
-//                    groupMessageMap.put(group , mess);
-//                    return mess.size();
-                    List<Message> list;
-             if(groupMessageMap.containsKey(group)) {
-              list = groupMessageMap.get(group);
-
-               list.add(message);
-               groupMessageMap.put(group,list);
-               return groupMessageMap.get(group).size(); }
-               else{
-                   list = new ArrayList<>();
-                   list.add(message);
-                 groupMessageMap.put(group,list);
-                 return groupMessageMap.get(group).size(); }
-
-
-
+                    List<Message> mess = new ArrayList<>();
+                    mess.add(message);
+                    groupMessageMap.put(group , mess);
+                    return mess.size()-1;
 
                 }
 
